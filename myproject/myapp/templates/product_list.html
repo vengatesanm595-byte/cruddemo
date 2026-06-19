@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUCT LIST</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2{
+            text-align: center;
+            color: #333;
+        }
+
+        .container{
+            width: 90%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .add-btn{
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 10px 18px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .add-btn:hover{
+            background: #218838;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th{
+            background: #007bff;
+            color: white;
+            padding: 12px;
+        }
+
+        td{
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover{
+            background: #f1f1f1;
+        }
+
+        img{
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .edit-btn{
+            background: #ffc107;
+            color: black;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .edit-btn:hover{
+            background: #e0a800;
+        }
+
+        .delete-btn{
+            background: #dc3545;
+            color: white;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .delete-btn:hover{
+            background: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>PRODUCT LIST</h2>
+
+    <a href="{% url 'add_product' %}" class="add-btn">
+    + Add Product
+</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Image</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for p in products %}
+            <tr>
+                <td>{{ p.name }}</td>
+                <td>₹{{ p.price }}</td>
+                <td>{{ p.quantity }}</td>
+
+                <td>
+                    {% if p.image %}
+                        <img src="{{ p.image.url }}" width="80" alt="{{ p.name }}">
+                    {% else %}
+                        <span>No Image</span>
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a href="{% url 'update_product' p.id %}" class="edit-btn">
+                        Edit
+                    </a>
+                </td>
+
+                <td>
+                    <a href="{% url 'delete_product' p.id %}" class="delete-btn">
+                        Delete
+                    </a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

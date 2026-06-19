@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+   <style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body{
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .container{
+        width:450px;
+        background:#fff;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h2{
+        text-align:center;
+        color:#333;
+        margin-bottom:20px;
+    }
+
+    form p{
+        margin-bottom:15px;
+    }
+
+    form label{
+        display:block;
+        margin-bottom:5px;
+        font-weight:600;
+        color:#444;
+    }
+
+    form input,
+    form select,
+    form textarea{
+        width:100%;
+        padding:10px;
+        border:1px solid #ccc;
+        border-radius:8px;
+        outline:none;
+        transition:0.3s;
+    }
+
+    form input:focus,
+    form textarea:focus{
+        border-color:#667eea;
+        box-shadow:0 0 5px rgba(102,126,234,0.5);
+    }
+
+    .btn{
+        width:100%;
+        padding:12px;
+        background:#667eea;
+        color:white;
+        border:none;
+        border-radius:8px;
+        font-size:16px;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    .btn:hover{
+        background:#5563d6;
+    }
+
+    .back-link{
+        display:block;
+        text-align:center;
+        margin-top:15px;
+        text-decoration:none;
+        color:#667eea;
+        font-weight:600;
+    }
+
+    .back-link:hover{
+        text-decoration:underline;
+    }
+</style>
+</head>
+<div class="container">
+
+    <h2>Add / Update Product</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn">
+            Save Product
+        </button>
+    </form>
+
+    <a href="{% url 'product_list' %}" class="back-link">
+        ← Back to Product List
+    </a>
+
+</div>
+</html>

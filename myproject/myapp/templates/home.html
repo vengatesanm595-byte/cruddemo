@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PRODUCTS</title>
+
+    <style>
+        .product-container{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-card{
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 250px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+
+        .product-card img{
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        body{
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>PRODUCT LIST</h1>
+
+<div class="product-container">
+
+    {% for product in products %}
+    <div class="product-card">
+
+        <img src="{{ product.image.url }}"
+             alt="{{ product.name }}">
+
+        <h3>{{ product.name }}</h3>
+
+        <p><strong>Price:</strong> ₹{{ product.price }}</p>
+
+        <p><strong>Quantity:</strong> {{ product.quantity }}</p>
+
+    </div>
+    {% empty %}
+        <p>No products available.</p>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
