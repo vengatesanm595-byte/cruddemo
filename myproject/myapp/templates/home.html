@@ -1,65 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PRODUCTS</title>
+    <title>PRODUCT HOME</title>
 
     <style>
-        .product-container{
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .product-card{
-            border: 1px solid #ccc;
-            padding: 15px;
-            width: 250px;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            background: #fff;
-        }
-
-        .product-card img{
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
 
         body{
             font-family: Arial, sans-serif;
-            background: #f4f4f4;
+            background:#f4f4f4;
+            margin:0;
+            padding:20px;
         }
 
         h1{
-            text-align: center;
+            text-align:center;
         }
+
+        .search-box{
+            text-align:center;
+            margin:20px;
+        }
+
+        .search-box input{
+            padding:10px;
+            width:300px;
+        }
+
+        .search-box button{
+            padding:10px 15px;
+        }
+
+        .container{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:20px;
+        }
+
+        .card{
+            width:250px;
+            background:white;
+            padding:15px;
+            border-radius:10px;
+            text-align:center;
+            box-shadow:0px 2px 10px rgba(0,0,0,.2);
+        }
+
+        .card img{
+            width:200px;
+            height:200px;
+            object-fit:cover;
+            border-radius:8px;
+        }
+
+        .pagination{
+            text-align:center;
+            margin-top:30px;
+        }
+
+        .pagination a{
+            text-decoration:none;
+            padding:8px 15px;
+            background:#007bff;
+            color:white;
+            margin:5px;
+            border-radius:5px;
+        }
+
     </style>
 </head>
 <body>
 
 <h1>PRODUCT LIST</h1>
 
-<div class="product-container">
+<form method="GET" class="search-box">
+    <input type="text"
+           name="search"
+           placeholder="Search Product"
+           value="{{ search }}">
 
-    {% for product in products %}
-    <div class="product-card">
+    <button type="submit">Search</button>
+</form>
 
-        <img src="{{ product.image.url }}"
-             alt="{{ product.name }}">
+<div class="container">
+
+    {% for product in page_obj %}
+
+    <div class="card">
+
+        <img src="{{ product.image.url }}" alt="">
 
         <h3>{{ product.name }}</h3>
 
-        <p><strong>Price:</strong> ₹{{ product.price }}</p>
+        <p><b>Price :</b> ₹{{ product.price }}</p>
 
-        <p><strong>Quantity:</strong> {{ product.quantity }}</p>
+        <p><b>Quantity :</b> {{ product.quantity }}</p>
 
     </div>
+
     {% empty %}
-        <p>No products available.</p>
+
+    <h2>No Product Found</h2>
+
     {% endfor %}
+
+</div>
+
+<div class="pagination">
+
+    {% if page_obj.has_previous %}
+
+        <a href="?page=1&search={{search}}">
+            First
+        </a>
+
+        <a href="?page={{ page_obj.previous_page_number }}&search={{search}}">
+            Previous
+        </a>
+
+    {% endif %}
+
+    Page {{ page_obj.number }}
+    of
+    {{ page_obj.paginator.num_pages }}
+
+    {% if page_obj.has_next %}
+
+        <a href="?page={{ page_obj.next_page_number }}&search={{search}}">
+            Next
+        </a>
+
+        <a href="?page={{ page_obj.paginator.num_pages }}&search={{search}}">
+            Last
+        </a>
+
+    {% endif %}
 
 </div>
 
