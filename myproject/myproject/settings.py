@@ -75,12 +75,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':'product_db',
-        'USER':'root',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'productlistdb',
+        'USER':'postgres',
         'PASSWORD':'root',
         'HOST':'localhost',
-        'PORT':'3306',
+        'PORT':'5432',
     }
 }
 
