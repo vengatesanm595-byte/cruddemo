@@ -82,12 +82,11 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 import dj_database_url
 from decouple import config
 
-DATABASES = {
-    'default': dj_database_url.parse(
-        config('DATABASE_URL')
-    )
-}
+DATABASE_URL = config('DATABASE_URL', default='sqlite:///db.sqlite3')
 
+DATABASES = {
+    'default': dj_database_url.parse(DATABASE_URL)
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
