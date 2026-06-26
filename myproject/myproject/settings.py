@@ -29,9 +29,10 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    ".onrender.com",
+    "https://cruddemo-71ps.onrender.com/",
 ]
 
+CSRF_TRUSTED_ORIGINS=["https://cruddemo-71ps.onrender.com/"]
 # Application definition
 
 INSTALLED_APPS = [
