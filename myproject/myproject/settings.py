@@ -24,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "cruddemo-71ps.onrender.com",
+    ".onrender.com",
 ]
 
 # Application definition
@@ -79,15 +79,13 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+import dj_database_url
+from decouple import config
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'productlistdb',
-        'USER':'postgres',
-        'PASSWORD':'root',
-        'HOST':'localhost',
-        'PORT':'5432',
-    }
+    'default': dj_database_url.parse(
+        config('DATABASE_URL')
+    )
 }
 
 
