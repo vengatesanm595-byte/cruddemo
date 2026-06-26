@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS=["https://cruddemo-71ps.onrender.com/"]
+
 # Application definition
 
 INSTALLED_APPS = [
